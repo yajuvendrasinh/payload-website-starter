@@ -1,0 +1,9 @@
+{
+  "collection": "pages",
+  "errors": [
+    {
+      "message": "Value must be unique",
+      "path": "slug"
+    }
+  ]
+}
