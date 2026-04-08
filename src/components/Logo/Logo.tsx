@@ -24,6 +24,7 @@ export const Logo = (props: Props) => {
       decoding="async"
       className={clsx('max-w-[9.375rem] w-full h-[34px]', className)}
       src="/favicon.svg"
+      style={{ filter: 'none' }}
     />
   )
 }
