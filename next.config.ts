@@ -30,7 +30,19 @@ const nextConfig: NextConfig = {
       }),
     ],
   },
+  reactStrictMode: true,
+  redirects,
+  turbopack: {
+    root: path.resolve(dirname),
+    resolveAlias: {
+      'vars': path.resolve(dirname, 'node_modules/@payloadcms/ui/dist/scss/vars.scss'),
+    },
+  },
   webpack: (webpackConfig) => {
+    webpackConfig.resolve.alias = {
+      ...webpackConfig.resolve.alias,
+      'vars': path.resolve(dirname, 'node_modules/@payloadcms/ui/dist/scss/vars.scss'),
+    }
     webpackConfig.resolve.extensionAlias = {
       '.cjs': ['.cts', '.cjs'],
       '.js': ['.ts', '.tsx', '.js', '.jsx'],
@@ -39,10 +51,8 @@ const nextConfig: NextConfig = {
 
     return webpackConfig
   },
-  reactStrictMode: true,
-  redirects,
-  turbopack: {
-    root: path.resolve(dirname),
+  sassOptions: {
+    includePaths: [path.resolve(dirname, 'node_modules/@payloadcms/ui/dist/scss')],
   },
 }
 
