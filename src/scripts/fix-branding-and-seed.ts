@@ -34,7 +34,7 @@ async function run() {
           slug: 'home',
           _status: 'published',
           hero: {
-            type: 'lowHero',
+            type: 'lowImpact',
             richText: {
               root: {
                 type: 'root',
@@ -42,7 +42,17 @@ async function run() {
                   {
                     type: 'heading',
                     tag: 'h1',
-                    children: [{ type: 'text', text: 'Welcome to Our Website' }],
+                    children: [
+                      {
+                        type: 'text',
+                        detail: 0,
+                        format: 0,
+                        mode: 'normal',
+                        style: '',
+                        text: 'Welcome to Our Website',
+                        version: 1,
+                      },
+                    ],
                     direction: 'ltr',
                     format: '',
                     indent: 0,
@@ -68,7 +78,17 @@ async function run() {
                             children: [
                                 {
                                     type: 'paragraph',
-                                    children: [{ type: 'text', text: 'This site is built with Payload CMS and a custom orange theme.' }],
+                                    children: [
+                                      {
+                                        type: 'text',
+                                        detail: 0,
+                                        format: 0,
+                                        mode: 'normal',
+                                        style: '',
+                                        text: 'This site is built with Payload CMS and a custom orange theme.',
+                                        version: 1,
+                                      },
+                                    ],
                                     direction: 'ltr',
                                     format: '',
                                     indent: 0,

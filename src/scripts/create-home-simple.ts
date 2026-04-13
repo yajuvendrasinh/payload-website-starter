@@ -42,15 +42,29 @@ async function run() {
                                 {
                                     type: 'heading',
                                     tag: 'h1',
-                                    children: [{ type: 'text', text: 'Welcome to My Website' }],
+                                    children: [
+                                        {
+                                            type: 'text',
+                                            detail: 0,
+                                            format: 0,
+                                            mode: 'normal',
+                                            style: '',
+                                            text: 'Welcome to My Website',
+                                            version: 1,
+                                        },
+                                    ],
                                     direction: 'ltr',
-                                    version: 1
-                                }
+                                    format: '',
+                                    indent: 0,
+                                    version: 1,
+                                },
                             ],
                             direction: 'ltr',
+                            format: '',
+                            indent: 0,
                             version: 1,
-                        }
-                    }
+                        },
+                    },
                 },
                 layout: [
                     {
@@ -64,19 +78,34 @@ async function run() {
                                         children: [
                                             {
                                                 type: 'paragraph',
-                                                children: [{ type: 'text', text: 'This is a programmatically created home page.' }],
+                                                children: [
+                                                    {
+                                                        type: 'text',
+                                                        detail: 0,
+                                                        format: 0,
+                                                        mode: 'normal',
+                                                        style: '',
+                                                        text: 'This is a programmatically created home page.',
+                                                        version: 1,
+                                                    },
+                                                ],
                                                 direction: 'ltr',
-                                                version: 1
-                                            }
+                                                format: '',
+                                                indent: 0,
+                                                textFormat: 0,
+                                                version: 1,
+                                            },
                                         ],
                                         direction: 'ltr',
+                                        format: '',
+                                        indent: 0,
                                         version: 1,
-                                    }
-                                }
-                            }
-                        ]
-                    }
-                ]
+                                    },
+                                },
+                            },
+                        ],
+                    },
+                ],
             }
         })
         console.log(`Home Creator: SUCCESS! ID: ${page.id}`)
