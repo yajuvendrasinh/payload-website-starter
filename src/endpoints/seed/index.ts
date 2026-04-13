@@ -98,48 +98,51 @@ export const seed = async ({
     ),
   ])
 
-  const [demoAuthor, image1Doc, image2Doc, image3Doc, imageHomeDoc] = await Promise.all([
-    payload.create({
-      collection: 'users',
+  const demoAuthor = await payload.create({
+    collection: 'users',
+    data: {
+      name: 'Demo Author',
+      email: 'demo-author@example.com',
+      password: 'password',
+    },
+  })
+
+  const image1Doc = await payload.create({
+    collection: 'media',
+    data: image1,
+    file: image1Buffer,
+  })
+
+  const image2Doc = await payload.create({
+    collection: 'media',
+    data: image2,
+    file: image2Buffer,
+  })
+
+  const image3Doc = await payload.create({
+    collection: 'media',
+    data: image2, // Note: image2 data is used for image3 too in the original script
+    file: image3Buffer,
+  })
+
+  const imageHomeDoc = await payload.create({
+    collection: 'media',
+    data: imageHero1,
+    file: hero1Buffer,
+  })
+
+  for (const category of categories) {
+    await payload.create({
+      collection: 'categories',
       data: {
-        name: 'Demo Author',
-        email: 'demo-author@example.com',
-        password: 'password',
+        title: category,
+        slug: category,
       },
-    }),
-    payload.create({
-      collection: 'media',
-      data: image1,
-      file: image1Buffer,
-    }),
-    payload.create({
-      collection: 'media',
-      data: image2,
-      file: image2Buffer,
-    }),
-    payload.create({
-      collection: 'media',
-      data: image2,
-      file: image3Buffer,
-    }),
-    payload.create({
-      collection: 'media',
-      data: imageHero1,
-      file: hero1Buffer,
-    }),
-    categories.map((category) =>
-      payload.create({
-        collection: 'categories',
-        data: {
-          title: category,
-          slug: category,
-        },
-        context: {
-          disableRevalidate: true,
-        },
-      }),
-    ),
-  ])
+      context: {
+        disableRevalidate: true,
+      },
+    })
+  }
 
   payload.logger.info(`— Seeding posts...`)
 
