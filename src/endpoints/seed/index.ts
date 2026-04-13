@@ -59,15 +59,15 @@ export const seed = async ({
     ),
   )
 
-  await Promise.all(
-    collections.map((collection) => payload.db.deleteMany({ collection, req, where: {} })),
-  )
+  for (const collection of collections) {
+    await payload.db.deleteMany({ collection, req, where: {} })
+  }
 
-  await Promise.all(
-    collections
-      .filter((collection) => Boolean(payload.collections[collection].config.versions))
-      .map((collection) => payload.db.deleteVersions({ collection, req, where: {} })),
-  )
+  for (const collection of collections) {
+    if (Boolean(payload.collections[collection].config.versions)) {
+      await payload.db.deleteVersions({ collection, req, where: {} })
+    }
+  }
 
   payload.logger.info(`— Seeding demo author and user...`)
 
@@ -134,6 +134,9 @@ export const seed = async ({
           title: category,
           slug: category,
         },
+        context: {
+          disableRevalidate: true,
+        },
       }),
     ),
   ])
@@ -176,6 +179,9 @@ export const seed = async ({
     data: {
       relatedPosts: [post2Doc.id, post3Doc.id],
     },
+    context: {
+      disableRevalidate: true,
+    },
   })
   await payload.update({
     id: post2Doc.id,
@@ -183,12 +189,18 @@ export const seed = async ({
     data: {
       relatedPosts: [post1Doc.id, post3Doc.id],
     },
+    context: {
+      disableRevalidate: true,
+    },
   })
   await payload.update({
     id: post3Doc.id,
     collection: 'posts',
     data: {
       relatedPosts: [post1Doc.id, post2Doc.id],
+    },
+    context: {
+      disableRevalidate: true,
     },
   })
 
@@ -198,6 +210,9 @@ export const seed = async ({
     collection: 'forms',
     depth: 0,
     data: contactFormData,
+    context: {
+      disableRevalidate: true,
+    },
   })
 
   payload.logger.info(`— Seeding pages...`)
@@ -207,11 +222,17 @@ export const seed = async ({
       collection: 'pages',
       depth: 0,
       data: home({ heroImage: imageHomeDoc, metaImage: image2Doc }),
+      context: {
+        disableRevalidate: true,
+      },
     }),
     payload.create({
       collection: 'pages',
       depth: 0,
       data: contactPageData({ contactForm: contactForm }),
+      context: {
+        disableRevalidate: true,
+      },
     }),
   ])
 
@@ -220,6 +241,9 @@ export const seed = async ({
   await Promise.all([
     payload.updateGlobal({
       slug: 'header',
+      context: {
+        disableRevalidate: true,
+      },
       data: {
         navItems: [
           {
@@ -244,6 +268,9 @@ export const seed = async ({
     }),
     payload.updateGlobal({
       slug: 'footer',
+      context: {
+        disableRevalidate: true,
+      },
       data: {
         navItems: [
           {
